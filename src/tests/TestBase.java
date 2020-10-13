@@ -3,6 +3,7 @@ package tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
@@ -19,18 +20,20 @@ public class TestBase {
     @BeforeMethod
     //метод, который открывает сайт https://trello.com/ общий для всех классов
     public void OpenAppl() throws InterruptedException {
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--lang=" + "en");
+        driver = new ChromeDriver(options);
         driver.get("https://trello.com/");
         waitUntilElementIsWebsite("https://trello.com/", 10);
         // Thread.sleep(10000);
     }
 
-     @AfterMethod
+   //  @AfterMethod
     //метод, котрый прекращает работу, общий для всех классов
-    public void tearDown() {
+   // public void tearDown() {
 
-        driver.quit();
-    }
+   //     driver.quit();
+  //  }
 
     //проверьте этот код,я придумала, для задержки веб сайта,можно так написать код?
     //ждем, пока элемент загрузится вебсайт
