@@ -19,21 +19,20 @@ public class TestBase {
 
     @BeforeMethod
     //метод, который открывает сайт https://trello.com/ общий для всех классов
-    public void OpenAppl() throws InterruptedException {
+    public void openAppl() throws InterruptedException {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--lang=" + "en");
         driver = new ChromeDriver(options);
         driver.get("https://trello.com/");
-        waitUntilElementIsWebsite("https://trello.com/", 10);
-        // Thread.sleep(10000);
+         Thread.sleep(5000);
     }
 
-   //  @AfterMethod
+    @AfterMethod
     //метод, котрый прекращает работу, общий для всех классов
-   // public void tearDown() {
+    public void tearDown() {
 
-   //     driver.quit();
-  //  }
+       driver.quit();
+   }
 
     //проверьте этот код,я придумала, для задержки веб сайта,можно так написать код?
     //ждем, пока элемент загрузится вебсайт

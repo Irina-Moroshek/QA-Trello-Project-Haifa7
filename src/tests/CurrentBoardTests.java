@@ -39,22 +39,24 @@ public class CurrentBoardTests extends TestBase {
         WebElement ioginBatton2 = driver.findElement(By.id("login-submit"));
         ioginBatton2.click();
 
-        waitUntilElementIsClickable(By.xpath("//button[@data-test-id ='header-boards-menu-button']"), 30);
-        //находим поле QA-Haifa7 board кликаем на него
-        WebElement BoardBattonHaifa7 = driver.findElement(By.xpath("//li[@class='boards-page-board-section-list-item'][.//div[@title ='QA-Haifa7']]"));
-        BoardBattonHaifa7.click();
-        waitUntilElementIsClickable(By.xpath("//button[@data-test-id='header-boards-menu-button']"), 30);
-    }
+         waitUntilElementIsClickable(By.xpath("//button[@data-test-id ='header-boards-menu-button']"),45);
+        //находим поле QA-Haifa7 board кликаем на него, открываем доску QA-Haifa7
+        WebElement qa7HaifaBoard = driver.findElement(By.xpath("//li[@class='boards-page-board-section-list-item'][.//div[@title ='QA-Haifa7']]"));
 
+        qa7HaifaBoard.click();
+        waitUntilElementIsClickable(By.id("workspaces-preamble-board-header-button"),15);
+        waitUntilElementIsPresent(By.tagName("h1"),10);
+    }
     @Test
     public void isCorrectCurrentBoard() {
         System.out.println("Header of the current board: " + driver.findElement(By.tagName("h1")).getText());
-        Assert.assertEquals(driver.findElement(By.tagName("h1")).getText(), "QA-Haifa7",
+        Assert.assertEquals(driver.findElement(By.tagName("h1")).getText(),"QA-Haifa7",
                 "The header of the screen is not 'QA-Haifa7'");
     }
+
         //Sel-07
         @Test
-        public void AddListToBoardPositive () {
+        public void addListToBoardPositive () {
             // waitUntilElementIsPresent(By.xpath("//div[@class = 'list js-list-content']"), 30);
             //вывсети количество списков на доске QA-Haifa7
             System.out.println("Quantity of lists on the board:" + driver.findElements(By.xpath("//div[@class = 'list js-list-content']")).size());
@@ -97,7 +99,7 @@ public class CurrentBoardTests extends TestBase {
                 WebElement MenuList = driver.findElement(By.xpath("//a[@class = 'list-header-extras-menu dark-hover js-open-list-menu icon-sm icon-overflow-menu-horizontal']"));
                 MenuList.click();
 
-                waitUntilElementIsPresent (By.xpath("\"//a[@class = 'js-close-list']"), 30);
+                waitUntilElementIsPresent (By.xpath("//a[@class = 'js-close-list']"), 30);
                 //выбрать опцию добавить лист в архив и кликнуть на нее
                 WebElement ArchiveList = driver.findElement(By.xpath("//a[@class = 'js-close-list']"));
                 ArchiveList.click();
@@ -137,7 +139,7 @@ public class CurrentBoardTests extends TestBase {
 
     //Sel-09 - создает новый лист в любом случае: если нет листа на доске и если есть лист
     @Test
-    public void AddNewListAndPutAnyListToArchive() {
+    public void addNewListAndPutAnyListToArchive() {
         waitUntilElementIsClickable(By.xpath("//button[@data-test-id='header-boards-menu-button']"), 30);
         //напечатать количество листов на доске вначале
         System.out.println("Quantity of lists on the board before sending the list at the beginning: " + driver
@@ -174,7 +176,7 @@ public class CurrentBoardTests extends TestBase {
         WebElement MenuList = driver.findElement(By.xpath("//a[@class = 'list-header-extras-menu dark-hover js-open-list-menu icon-sm icon-overflow-menu-horizontal']"));
         MenuList.click();
 
-        waitUntilElementIsPresent (By.xpath("\"//a[@class = 'js-close-list']"), 30);
+        waitUntilElementIsPresent (By.xpath("//a[@class = 'js-close-list']"), 30);
         //выбрать опцию добавить лист в архив и кликнуть на нее
         WebElement ArchiveList = driver.findElement(By.xpath("//a[@class = 'js-close-list']"));
         ArchiveList.click();

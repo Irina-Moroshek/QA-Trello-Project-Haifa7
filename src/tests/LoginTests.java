@@ -138,10 +138,15 @@ public class LoginTests extends TestBase {
             login.click();
 
             waitUntilElementIsClickable(By.xpath("//button[@data-test-id ='header-boards-menu-button']"),20);
-            //waitUntilElementIsVisible(By.xpath("//button[@data-test-id='header-boards-menu-button']"), 30);
+
             System.out.println("Boards button text: " + driver.findElement(By.xpath("//button[@data-test-id='header-boards-menu-button']")).getText());
             Assert.assertTrue(driver.findElement(By.xpath("//button[@data-test-id ='header-boards-menu-button']"))
                     .getText().equals("Boards"),"The text on the button is not 'Board'");
+
+
+
+
+
         }
     }
 
