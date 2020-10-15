@@ -57,7 +57,10 @@ public class CurrentBoardTests extends TestBase {
         //Sel-07
         @Test
         public void addListToBoardPositive () {
-            // waitUntilElementIsPresent(By.xpath("//div[@class = 'list js-list-content']"), 30);
+             waitUntilElementIsPresent(By.xpath("//div[@class = 'list js-list-content']"), 30);
+            int quantityListsInTheBeginning = driver.findElements(By.xpath("//div[@class = 'list js-list-content']")).size();
+            int quantityListsAtTheEnd = driver.findElements(By.xpath("//div[@class = 'list js-list-content']")).size();
+
             //вывсети количество списков на доске QA-Haifa7
             System.out.println("Quantity of lists on the board:" + driver.findElements(By.xpath("//div[@class = 'list js-list-content']")).size());
 
@@ -76,7 +79,7 @@ public class CurrentBoardTests extends TestBase {
             //  waitUntilElementIsPresent(By.xpath("//div[@class = 'list js-list-content']"), 30);
             //вывсети количество списков на доске QA-Haifa7 после добавления листа
             System.out.println("Quantity of lists on the board after adding a new list:" + driver.findElements(By.xpath("//div[@class = 'list js-list-content']")).size());
-
+            Assert.assertEquals(quantityListsInTheBeginning,quantityListsAtTheEnd);
         }
 
         //Sel-09 - если лист есть, сразу отпрвялет в архив; если листа нет - создает лист, и потом отправляет в архив
@@ -84,12 +87,14 @@ public class CurrentBoardTests extends TestBase {
         public void putAnyListToArchive () {
             waitUntilElementIsClickable(By.xpath("//button[@data-test-id='header-boards-menu-button']"), 30);
 
+            int quantityListsInTheBeginning = driver.findElements(By.xpath("//div[@class = 'list js-list-content']")).size();
+            int quantityListsAtTheEnd = driver.findElements(By.xpath("//div[@class = 'list js-list-content']")).size();
+
             //напечатать количество листов на доске вначале
             System.out.println("Quantity of lists on the board before sending the list at the beginning: " + driver
                     .findElements(By.xpath("//div[@class = 'list js-list-content']"))
                     .size());
 
-            //проверить есть ли списки, если списков нет, то добавить список
             WebElement addList = driver.findElement(By.xpath("//a[@class='open-add-list js-open-add-list']"));
             // WebElement addList = driver.findElement(By.cssSelector("a.open-add-list"));
 
@@ -119,13 +124,13 @@ public class CurrentBoardTests extends TestBase {
                 AddList.click();
 
                 //вывсети количество списков на доске QA-Haifa7 после добавления листа
-                System.out.println("Lists quantity before archive: " + driver.findElements(By.xpath("//div[@class = 'list js-list-content']")).size());
+               System.out.println("Lists quantity before archive: " + driver.findElements(By.xpath("//div[@class = 'list js-list-content']")).size());
 
                 //нажать кнопку меню листа
                 WebElement MenuList = driver.findElement(By.xpath("//a[@class = 'list-header-extras-menu dark-hover js-open-list-menu icon-sm icon-overflow-menu-horizontal']"));
                 MenuList.click();
 
-                waitUntilElementIsPresent (By.xpath("\"//a[@class = 'js-close-list']"), 30);
+                waitUntilElementIsPresent (By.xpath("//a[@class = 'js-close-list']"), 30);
                 //выбрать опцию добавить лист в архив и кликнуть на нее
                 WebElement ArchiveList = driver.findElement(By.xpath("//a[@class = 'js-close-list']"));
                 ArchiveList.click();
@@ -133,7 +138,7 @@ public class CurrentBoardTests extends TestBase {
 
             //вывсети количество списков на доске QA-Haifa7 после помещения листа в аврхив
             System.out.println("Lists quantity after archive: " + driver.findElements(By.xpath("//div[@class = 'list js-list-content']")).size());
-
+            Assert.assertEquals(quantityListsInTheBeginning,quantityListsAtTheEnd);
         }
 
 
@@ -141,12 +146,18 @@ public class CurrentBoardTests extends TestBase {
     @Test
     public void addNewListAndPutAnyListToArchive() {
         waitUntilElementIsClickable(By.xpath("//button[@data-test-id='header-boards-menu-button']"), 30);
+
+
+        int quantityListsInTheBeginning = driver.findElements(By.xpath("//div[@class = 'list js-list-content']")).size();
+        int quantityListsAtTheEnd = driver.findElements(By.xpath("//div[@class = 'list js-list-content']")).size();
+
+
         //напечатать количество листов на доске вначале
         System.out.println("Quantity of lists on the board before sending the list at the beginning: " + driver
                 .findElements(By.xpath("//div[@class = 'list js-list-content']"))
                 .size());
 
-        //проверить есть ли списки, если списков нет, то добавить список
+
         WebElement addList = driver.findElement(By.xpath("//a[@class='open-add-list js-open-add-list']"));
         // WebElement addList = driver.findElement(By.cssSelector("a.open-add-list"));
 
@@ -183,7 +194,7 @@ public class CurrentBoardTests extends TestBase {
 
         //вывсети количество списков на доске QA-Haifa7 после помещения листа в аврхив
         System.out.println("Lists quantity after archive: " + driver.findElements(By.xpath("//div[@class = 'list js-list-content']")).size());
-
+        Assert.assertEquals(quantityListsInTheBeginning,quantityListsAtTheEnd);
     }
 }
 
